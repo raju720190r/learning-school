@@ -4,16 +4,16 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
     const navbar = <>
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/instruct">Instructors</Link></li>
-        <li><Link>Classes</Link></li>
-        <li><Link>Dashboard</Link></li>
+        <li><Link to="/instructors">Instructors</Link></li>
+        <li><Link to="/classes">Classes</Link></li>
+        <li><Link to="/dashboard">Dashboard</Link></li>
         
     </>
 
 
 
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar max-w-screen-xl mx-auto bg-base-100 mb-5">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">

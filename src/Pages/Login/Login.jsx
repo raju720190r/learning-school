@@ -1,13 +1,28 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { FaGoogle } from 'react-icons/fa';
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const Login = () => {
+    const {signIn} =useContext(AuthContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const onSubmit = data => {
+        console.log(data)
+    signIn(data.email,data.password)
+    .then(result =>{
+        const user =result.user;
+        console.log(user);
+    })
+    };
     return (
+        <>
+        <Helmet><title>Learning School || Login</title></Helmet>
         <div className="hero ">
+            
             <div className="card flex-shrink-0 w-1/3 rounded-none my-20 mx-20 shadow-2xl bg-base-100">
-                <form onSubmit={handleSubmit(onSubmit)} className="card-body my-10">
+                <form onSubmit={handleSubmit(onSubmit)} className="card-body text-center">
                     <div className="form-control mb-10">
                         <h2 className="text-3xl font-bold"> Please Login </h2>
                     </div>
@@ -26,15 +41,21 @@ const Login = () => {
                             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                         </label>
                     </div>
-                    <div className="form-control mt-6">
-                        <button className="btn bg-red-500 text-white hover:bg-slate-950 rounded-sm">Login</button>
+                    <div className="mt-6">
+                        <input className="btn w-80 bg-red-500 text-white hover:bg-slate-950 rounded-sm" type="submit" value="Login" />
                     </div>
-                    <div className="mt-5">
-                        <p className="text-xl"><small>Already have an Account? <Link className="text-red-500">Register</Link> </small></p>
-                    </div>
+                      
                 </form>
+                <div className="mt-3 text-center">
+                        <button className="btn w-80 hover:bg-red-500 text-white text-2xl bg-slate-950 rounded-sm"><FaGoogle></FaGoogle></button>
+                    </div>
+                    <div className="my-5 text-center">
+                        <p className="text-xl"><small>New User ?  
+                            <Link className="btn btn-link text-red-500" to={'/signUp'}> Register</Link> </small></p>
+                    </div>
             </div>
         </div>
+        </>
 
     );
 };
