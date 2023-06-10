@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaGoogle,FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -7,22 +7,33 @@ import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 
 const SignUp = () => {
-    const { createUser,googleSignIn } = useContext(AuthContext);
+    const { createUser,googleSignIn,updateUserProfile,logOut} = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
-    const { register, handleSubmit,watch, formState: { errors } } = useForm();
+    const navigate = useNavigate();
+    const { register, handleSubmit,watch,reset, formState: { errors } } = useForm();
     const onSubmit = data => {
+        console.log(data)
         createUser(data.email, data.password)
             .then(result => {
-
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'User Created Successfully',
-                    showConfirmButton: false,
-                    timer: 1500
+                updateUserProfile(data.name,data.photoURL)
+                .then(()=>{
+                    console.log('User Profile Updated');
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'User Created Successfully',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    logOut();
+                    navigate('/');
+                    reset();
+
+                    
                 })
+                
             })
 
 

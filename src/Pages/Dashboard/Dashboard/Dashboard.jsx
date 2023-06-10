@@ -6,7 +6,7 @@ import { Helmet } from "react-helmet";
 const Dashboard = () => {
     return (
 
-        <div className="drawer h-full bg-red-100 lg:drawer-open">
+        <div className="drawer mt-20 h-full bg-red-100 lg:drawer-open">
             <Helmet><title>Learning School || Dashboard</title></Helmet>
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col items-center justify-center">
