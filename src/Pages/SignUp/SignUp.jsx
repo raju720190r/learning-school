@@ -1,14 +1,15 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { FaGoogle } from 'react-icons/fa';
-import { useContext } from "react";
+import { FaGoogle,FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
 
 const SignUp = () => {
-    const { createUser } = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { createUser,googleSignIn } = useContext(AuthContext);
+    const [showPassword, setShowPassword] = useState(false);
+    const { register, handleSubmit,watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         createUser(data.email, data.password)
             .then(result => {
@@ -18,13 +19,30 @@ const SignUp = () => {
                 Swal.fire({
                     position: 'top-end',
                     icon: 'success',
-                    title: 'Your work has been saved',
+                    title: 'User Created Successfully',
                     showConfirmButton: false,
                     timer: 1500
                 })
             })
 
 
+    };
+    const handleGoogleSignIn =()=>{
+        googleSignIn()
+        .then(result=>{
+            const loggedInUser = result.user;
+            console.log(loggedInUser);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'User Login SuccessFully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        })
+    }
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     };
     return (
         <div className="hero ">
@@ -57,23 +75,27 @@ const SignUp = () => {
                         <label className="label">
                             <span className="label-text">Password</span>
                         </label>
-                        <input type="password" {...register("password", {
+                        
+                        <input  type={showPassword ? "text" : "password"} {...register("password", {
                             required: true,
                             minLength: 6,
                             maxLength: 20,
                             pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
-                        })} placeholder="password" className="input input-bordered" />
-                        {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
+                        })} placeholder="password" className="input input-bordered w-3/3" />
+                       <div>
+                       {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
                         {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
                         {errors.password?.type === 'maxLength' && <p className="text-red-600">Password must be less than 20 characters</p>}
                         {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
+                       </div>
                     </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Confirm Password</span>
                         </label>
-                        <input type="password" {...register("confirmPassword", {
+                        <input type={showPassword ? "text" : "password"} {...register("confirmPassword", {
                             required: true,
+                            validate: (value) => value === watch('password'),
                             minLength: 6,
                             maxLength: 20,
                             pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
@@ -82,15 +104,19 @@ const SignUp = () => {
                         {errors.confirmPassword?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
                         {errors.confirmPassword?.type === 'maxLength' && <p className="text-red-600">Password must be less than 20 characters</p>}
                         {errors.confirmPassword?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
+                        {errors.confirmPassword?.type === 'validate' && <p className="text-red-600">Password do not match</p>}
 
                     </div>
+                    <div className="my-3 w-10 mx-auto">
+                        <span className="text-3xl" onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
+                        </div>
                     <div className="text-center mt-6">
                         <input className="btn w-[580px] bg-red-500 text-white hover:bg-slate-950 rounded-sm" type="submit" value="Register" />
                     </div>
 
                 </form>
                 <div className="mt-3 text-center ">
-                    <button className="btn w-[580px] hover:bg-red-500 text-white text-2xl bg-slate-950 rounded-sm"><FaGoogle></FaGoogle></button>
+                    <button onClick={handleGoogleSignIn} className="btn w-[580px] hover:bg-red-500 text-white text-2xl bg-slate-950 rounded-sm"><FaGoogle></FaGoogle></button>
                 </div>
                 <div className="my-5 text-center">
                     <p className="text-xl"><small>Already have an Account?<Link className="btn btn-link text-red-500" to={'/login'}>Login</Link> </small></p>

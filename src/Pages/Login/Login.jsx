@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { FaGoogle } from 'react-icons/fa';
-import { useContext } from "react";
+import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
+import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet";
+import Swal from "sweetalert2";
 
 const Login = () => {
-    const {signIn} =useContext(AuthContext);
+    const {signIn,googleSignIn} =useContext(AuthContext);
+    const [showPassword, setShowPassword] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => {
         console.log(data)
@@ -15,6 +17,23 @@ const Login = () => {
         const user =result.user;
         console.log(user);
     })
+    };
+    const handleGoogleSignIn =()=>{
+        googleSignIn()
+        .then(result=>{
+            const loggedInUser = result.user;
+            console.log(loggedInUser);
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'User Login SuccessFully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        })
+    }
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     };
     return (
         <>
@@ -36,18 +55,21 @@ const Login = () => {
                         <label className="label">
                             <span className="label-text">Password{errors.email && <span className="ml-5 text-2xl text-red-500">*</span>}</span>
                         </label>
-                        <input type="password" {...register("password", { required: true })} placeholder="password" className="input input-bordered" />
+                        <input type={showPassword ? "text" : "password"} {...register("password", { required: true })} placeholder="password" className="input input-bordered" />
                         <label className="label">
                             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                         </label>
                     </div>
+                    <div className="my-3 w-10 mx-auto">
+                        <span className="text-3xl" onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
+                        </div>
                     <div className="mt-6">
                         <input className="btn w-80 bg-red-500 text-white hover:bg-slate-950 rounded-sm" type="submit" value="Login" />
                     </div>
                       
                 </form>
                 <div className="mt-3 text-center">
-                        <button className="btn w-80 hover:bg-red-500 text-white text-2xl bg-slate-950 rounded-sm"><FaGoogle></FaGoogle></button>
+                        <button onClick={handleGoogleSignIn} className="btn w-80 hover:bg-red-500 text-white text-2xl bg-slate-950 rounded-sm"><FaGoogle></FaGoogle></button>
                     </div>
                     <div className="my-5 text-center">
                         <p className="text-xl"><small>New User ?  
