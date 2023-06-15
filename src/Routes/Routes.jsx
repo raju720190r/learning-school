@@ -7,9 +7,11 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import Instructors from "../Pages/Instructors/Instructors";
-import Classes from "../Pages/Classes/Classes";
-import Dashboard from "../Pages/Dashboard/Dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
+import Dashboard from "../Layout/Dashboard";
+import MyClass from "../Pages/Dashboard/MyClass";
+import EnrollClass from "../Pages/Dashboard/EnrollClass";
+import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -30,17 +32,34 @@ export const router = createBrowserRouter([
             },
             {
                 path:'instructors',
-                element:<Instructors></Instructors>
-            },
-            {
-                path:'classes',
-                element:<PrivateRoute><Classes></Classes></PrivateRoute>
-            },
-            {
-                path:'dashboard',
-                element:<Dashboard></Dashboard>
+                element:<PrivateRoute><Instructors></Instructors></PrivateRoute>
             }
+            // {
+            //     path:'classes',
+            //     element:<Classes></Classes>
+            // }
 
         ]
     },
+    {
+        path:'dashboard',
+        element:<Dashboard></Dashboard>,
+        children:[
+             {
+                path:'myClasses',
+                element:<MyClass></MyClass>
+
+             },
+             {
+                path:'myEnrollClass',
+                element:<EnrollClass></EnrollClass>
+             },
+             {
+                path:'paymentHistory',
+                element:<PaymentHistory></PaymentHistory>
+             }
+            
+
+        ]
+    }
 ]);
