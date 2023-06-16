@@ -49,7 +49,7 @@ const Dashboard = () => {
                                 <span className="mx-4 font-medium">Manage Users</span>
                             </NavLink>
                             <NavLink
-                                to="/dashboard/manageclasses"
+                                to="/dashboard/manageclass"
                                 className={({ isActive }) =>
                                     `flex items-center px-4 py-2 mt-5 text transition-colors duration-300 transform hover:text-info hover:bg-neutral  ${isActive ? "bg-info/30" : "text-gray"
                                     }`
