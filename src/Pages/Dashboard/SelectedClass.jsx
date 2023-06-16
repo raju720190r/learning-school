@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import MyClassTable from "../../../components/MyClassTable/MyClassTable";
-import useAuth from "../../../hooks/useAuth";
-import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
 import Swal from "sweetalert2";
+import useAuth from "../../Hooks/usAuth";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import { useQuery } from "react-query";
+import MyClassTable from "../../components/MyClassTable";
 
 const MySelectedClass = () => {
     const navigate = useNavigate();

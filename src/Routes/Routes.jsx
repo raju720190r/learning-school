@@ -13,6 +13,7 @@ import MyClass from "../Pages/Dashboard/MyClass";
 import EnrollClass from "../Pages/Dashboard/EnrollClass";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
 import AllUsers from "../Pages/Dashboard/AllUsers";
+import Classes from "../Pages/Classes/Classes";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -34,11 +35,11 @@ export const router = createBrowserRouter([
             {
                 path:'instructors',
                 element:<PrivateRoute><Instructors></Instructors></PrivateRoute>
+            },
+            {
+                path:'classes',
+                element:<Classes></Classes>
             }
-            // {
-            //     path:'classes',
-            //     element:<Classes></Classes>
-            // }
 
         ]
     },
