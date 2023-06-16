@@ -1,57 +1,61 @@
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { FaGoogle,FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const SignUp = () => {
-    const { createUser,googleSignIn,updateUserProfile,logOut} = useContext(AuthContext);
+    const { createUser, updateUserProfile, logOut } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
-    const { register, handleSubmit,watch,reset, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
-        console.log(data)
         createUser(data.email, data.password)
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                updateUserProfile(data.name,data.photoURL)
-                .then(()=>{
-                    console.log('User Profile Updated');
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'User Created Successfully',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
-                    logOut();
-                    navigate('/');
-                    reset();
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        const saveUser = { name: data.name, email: data.email }
+                        fetch('http://localhost:5000/users',
+                            {
+                                method: 'POST',
+                                headers: {
+                                    'content-type': 'application/json'
+                                },
+                                body: JSON.stringify(saveUser)
 
-                    
-                })
-                
+                            }
+
+                        )
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'User Created Successfully',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    logOut();
+                                    navigate('/');
+                                    reset();
+                                }
+                            })
+
+
+
+                    })
+
             })
 
 
     };
-    const handleGoogleSignIn =()=>{
-        googleSignIn()
-        .then(result=>{
-            const loggedInUser = result.user;
-            console.log(loggedInUser);
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'User Login SuccessFully',
-                showConfirmButton: false,
-                timer: 1500
-            })
-        })
-    }
+    
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -86,19 +90,19 @@ const SignUp = () => {
                         <label className="label">
                             <span className="label-text">Password</span>
                         </label>
-                        
-                        <input  type={showPassword ? "text" : "password"} {...register("password", {
+
+                        <input type={showPassword ? "text" : "password"} {...register("password", {
                             required: true,
                             minLength: 6,
                             maxLength: 20,
                             pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/
                         })} placeholder="password" className="input input-bordered w-3/3" />
-                       <div>
-                       {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
-                        {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
-                        {errors.password?.type === 'maxLength' && <p className="text-red-600">Password must be less than 20 characters</p>}
-                        {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
-                       </div>
+                        <div>
+                            {errors.password?.type === 'required' && <p className="text-red-600">Password is required</p>}
+                            {errors.password?.type === 'minLength' && <p className="text-red-600">Password must be 6 characters</p>}
+                            {errors.password?.type === 'maxLength' && <p className="text-red-600">Password must be less than 20 characters</p>}
+                            {errors.password?.type === 'pattern' && <p className="text-red-600">Password must have one Uppercase one lower case, one number and one special character.</p>}
+                        </div>
                     </div>
                     <div className="form-control">
                         <label className="label">
@@ -120,14 +124,14 @@ const SignUp = () => {
                     </div>
                     <div className="my-3 w-10 mx-auto">
                         <span className="text-3xl" onClick={togglePasswordVisibility}>{showPassword ? <FaEyeSlash /> : <FaEye />}</span>
-                        </div>
+                    </div>
                     <div className="text-center mt-6">
                         <input className="btn w-[580px] bg-red-500 text-white hover:bg-slate-950 rounded-sm" type="submit" value="Register" />
                     </div>
 
                 </form>
-                <div className="mt-3 text-center ">
-                    <button onClick={handleGoogleSignIn} className="btn w-[580px] hover:bg-red-500 text-white text-2xl bg-slate-950 rounded-sm"><FaGoogle></FaGoogle></button>
+                <div className=" text-center ">
+                    <SocialLogin></SocialLogin>
                 </div>
                 <div className="my-5 text-center">
                     <p className="text-xl"><small>Already have an Account?<Link className="btn btn-link text-red-500" to={'/login'}>Login</Link> </small></p>

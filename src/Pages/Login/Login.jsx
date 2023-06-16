@@ -1,13 +1,14 @@
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { FaEye, FaEyeSlash, FaGoogle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash} from 'react-icons/fa';
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Helmet } from "react-helmet";
 import Swal from "sweetalert2";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
-    const { signIn, googleSignIn } = useContext(AuthContext);
+    const { signIn} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
@@ -30,21 +31,6 @@ const Login = () => {
                 navigate(from, { replace: true });
             })
     };
-    const handleGoogleSignIn = () => {
-        googleSignIn()
-            .then(result => {
-                const loggedInUser = result.user;
-                console.log(loggedInUser);
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'User Login SuccessFully',
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                navigate(from, { replace: true });
-            })
-    }
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -82,7 +68,7 @@ const Login = () => {
 
                     </form>
                     <div className="mt-3 text-center">
-                        <button onClick={handleGoogleSignIn} className="btn w-80 hover:bg-red-500 text-white text-2xl bg-slate-950 rounded-sm"><FaGoogle></FaGoogle></button>
+                        <SocialLogin></SocialLogin>
                     </div>
                     <div className="my-5 text-center">
                         <p className="text-xl"><small>New User ?
