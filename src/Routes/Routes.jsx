@@ -12,6 +12,7 @@ import Dashboard from "../Layout/Dashboard";
 import MyClass from "../Pages/Dashboard/MyClass";
 import EnrollClass from "../Pages/Dashboard/EnrollClass";
 import PaymentHistory from "../Pages/Dashboard/PaymentHistory";
+import AllUsers from "../Pages/Dashboard/AllUsers";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -57,7 +58,12 @@ export const router = createBrowserRouter([
              {
                 path:'paymentHistory',
                 element:<PaymentHistory></PaymentHistory>
-             }
+             },
+             {
+                path:'allUsers',
+                element:<PrivateRoute><AllUsers></AllUsers></PrivateRoute>
+             },
+             
             
 
         ]
