@@ -1,10 +1,7 @@
-import { useQuery } from "react-query";
+
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/usAuth";
-
-
-
-
+import { useQuery } from "@tanstack/react-query";
 
 const MyClass = () => {
 

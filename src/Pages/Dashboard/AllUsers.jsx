@@ -1,12 +1,12 @@
-
 import { FaTrashAlt, FaUserShield, FaUserTag } from "react-icons/fa";
-import { useQuery } from "react-query";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 
 const AllUsers = () => {
+    
     const { data: users = [], refetch } = useQuery(["users"], async () => {
-        const res = await fetch(`${import.meta.env.VITE_server_url}/users`);
+        const res = await fetch(`${import.meta.env.VITE_serverURL}/users`);
         return res.json();
     });
 
@@ -35,7 +35,7 @@ const AllUsers = () => {
     };
 
     const handleMakeInstructor = user => {
-        fetch(`${import.meta.env.VITE_server_url}/users/instructor/${user._id}`, {
+        fetch(`${import.meta.env.VITE_serverURL}/users/instructor/${user._id}`, {
             method: "PATCH"
         })
             .then(res => res.json())

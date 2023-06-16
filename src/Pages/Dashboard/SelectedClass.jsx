@@ -2,8 +2,10 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/usAuth";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useQuery } from "react-query";
+
 import MyClassTable from "../../components/MyClassTable";
+import { useQuery } from "@tanstack/react-query";
+
 
 const MySelectedClass = () => {
     const navigate = useNavigate();

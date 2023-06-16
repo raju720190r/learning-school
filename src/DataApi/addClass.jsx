@@ -1,5 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useQuery } from "react-query";
+
 
 export const addClass = async (classData) => {
     const response = await fetch(`${import.meta.env.VITE_server_url}/classes`, {

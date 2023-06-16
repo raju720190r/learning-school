@@ -1,23 +1,15 @@
-// import { useForm } from 'react-hook-form';
 
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import useAuth from "../../Hooks/usAuth";
 import { uploadImage } from "../../DataApi/uploadImage";
 import { addClass } from "../../DataApi/addClass";
 import AddClassFrom from "../../components/AddClassFrom";
+import useAuth from "../../Hooks/usAuth";
 
 
 
 const AddClass = () => {
-
-    // const { register, handleSubmit, formState: { errors } } = useForm();
-    // const onSubmit = data => {
-    //     console.log(data)
-    // };
-    // console.log(errors);
-
     const { user } = useAuth();
     const [loading, setLoading] = useState(false);
     const [uploadButtonText, setUploadButtonText] = useState('Upload Class Image');
@@ -34,6 +26,7 @@ const AddClass = () => {
         const availableSeats = parseInt(seats);
         const image = e.target.image.files[0];
         setUploadButtonText("uploading...");
+        console.log(name,instructor,instructorEmail,price,seats,availableSeats,image);
 
         // image upload to imgbb
         uploadImage(image)

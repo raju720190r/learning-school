@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useQuery } from "react-query";
+
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import UserTable from "../../components/userTable";
 import FeedbackModal from "../../components/FeedbackModal";
 import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 const ManageClass = () => {
     // const [classes] = useClass();
