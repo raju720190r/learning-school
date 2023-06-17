@@ -73,7 +73,7 @@ const CheckoutForm = ({ price, cart }) => {
 
       const work = { id: cart.classId };
       console.log("work", work);
-      fetch(`http://localhost:5000/updateStudent`, {
+      fetch(`https://l-school-server.vercel.app/updateStudent`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

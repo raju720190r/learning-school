@@ -33,7 +33,7 @@ const Registration = () => {
             .then(() => {
               const saveUser = { name: data.name, email: data.email, image: data.photoURL };
               console.log("saveUser", saveUser);
-              fetch(`http://localhost:5000/users`, {
+              fetch(`https://l-school-server.vercel.app/users`, {
                 method: "POST",
                 headers: {
                   "content-type": "application/json",

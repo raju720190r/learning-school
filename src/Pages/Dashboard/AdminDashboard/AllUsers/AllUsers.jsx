@@ -16,7 +16,7 @@ const AllUsers = () => {
     const handleMakeAdmin = (user,role) =>{
         console.log('role',role);
         const work ={ id: user?._id, role}
-        fetch(`http://localhost:5000/users/admin`, {
+        fetch(`https://l-school-server.vercel.app/users/admin`, {
             method: 'PATCH',
             headers: {
                 "content-type": "application/json",

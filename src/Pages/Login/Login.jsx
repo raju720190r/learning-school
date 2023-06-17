@@ -31,7 +31,7 @@ const Login = () => {
         reset()
         Swal.fire({
             icon: "success",
-            title: "User created successfully.",
+            title: "User Login successfully",
             showConfirmButton: false,
             timer: 1500,
           });

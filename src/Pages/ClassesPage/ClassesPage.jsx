@@ -1,4 +1,4 @@
-import Lottie from "lottie-react";
+
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -25,7 +25,7 @@ const ClassesPage = () => {
     const {_id, instructorName,availableSeats,description,image,instructorEmail,price,studentNumber,time,title} = item
     if (user && user.email ) {
       const cartItem = {classId:_id, instructorName, availableSeats, description,image,instructorEmail,price,studentNumber,time,title, email: user?.email}
-      fetch(`http://localhost:5000/classSelects`,{
+      fetch(`https://l-school-server.vercel.app/classSelects`,{
         method: 'POST',
         headers:{
           'content-type': 'application/json'

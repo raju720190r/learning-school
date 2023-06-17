@@ -8,7 +8,7 @@ const PaymentHistory = () => {
     const [payedClass, setPayedClass] = useState([])
 
     useEffect(()=>{
-       user?.email && fetch(`http://localhost:5000/payed-class/${user?.email}`)
+       user?.email && fetch(`https://l-school-server.vercel.app/payed-class/${user?.email}`)
         .then(res => res.json())
         .then(data =>{
             setPayedClass(data);

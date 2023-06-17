@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 const useClasses = () => {
     const [classes, setClasses] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/popularClasses")
+    fetch("https://l-school-server.vercel.app/popularClasses")
       .then((res) => res.json())
       .then((data) => {
         setClasses(data);

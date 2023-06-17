@@ -21,7 +21,7 @@ const ManageClasses = () => {
       console.log(text);
       Swal.fire(text);
       const feed = { id: item?._id, text };
-      fetch(`http://localhost:5000/instructorFeedback`, {
+      fetch(`https://l-school-server.vercel.app/instructorFeedback`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
@@ -38,7 +38,7 @@ const ManageClasses = () => {
   const handleStatus = (item, role) => {
     console.log("role", role);
     const work = { id: item?._id, role };
-    fetch(`http://localhost:5000/changePendingClass`, {
+    fetch(`https://l-school-server.vercel.app/changePendingClass`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
