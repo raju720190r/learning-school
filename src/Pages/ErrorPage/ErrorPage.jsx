@@ -1,34 +1,25 @@
-
 import { Link, useRouteError } from 'react-router-dom';
-
+import Lottie from "lottie-react";
+import errorPage from '../../assets/110076-group-class.json'
+import useTitle from '../../hooks/useTitle';
 const ErrorPage = () => {
-    const error = useRouteError();
-    console.error(error);
+    // eslint-disable-next-line no-unused-vars
+    const { error, status } = useRouteError()
+    useTitle("Error")
     return (
-        <>
-            <div className="flex items-center justify-center h-screen">
-                <div className="bg-white">
-                    <div className="flex flex-col items-center">
-                        <h1 className="font-bold text-3xl text-orange-500 lg:text-6xl">
-                            404
-                        </h1>
-
-                        <h6 className="mb-2 text-2xl font-bold text-center text-gray-800 md:text-3xl">
-                            <span className="text-red-500">Oops!</span> Page{" "}
-                            {error.statusText}
-                        </h6>
-
-                        <p className="mb-4 text-center text-gray-500 md:text-lg">
-                            The page you’re looking for doesn’t exist.
-                        </p>
-
-                        <Link to="/" className="px-5 py-2 rounded-md text-white bg-red-500 hover:bg-pink-800"
-                        >Go home
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        </>
+        <section className='error-bg flex items-center h-screen p-16 text-gray-900'>
+        <div className='container flex flex-col items-center  px-5 mx-auto my-8'>
+        <Lottie animationData={errorPage} loop={true} />;
+          <div className='max-w-md text-center'>
+            <p className='text-2xl font-semibold md:text-3xl text-red-800 mb-8'>
+              {error?.message}
+            </p>
+            <Link to='/' className='py-3 px-5 rounded-md bg-cyan-300 text-xl'>
+              Back to homepage
+            </Link>
+          </div>
+        </div>
+      </section>
     );
 };
 

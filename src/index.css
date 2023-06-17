@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn-color{
+    background-color: #f24061;
+    ;
+}
+.text_color{
+    color: #fff;
+}
+ a.active {
+    background-color: #e51e43;
+    font-size: large;
+    color: #fff;
+  }
