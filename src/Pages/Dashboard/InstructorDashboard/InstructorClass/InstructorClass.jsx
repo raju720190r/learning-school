@@ -56,7 +56,7 @@ const InstructorClass = () => {
                 <th>{item.price}</th>
                 <th>{item.status}</th>
                 <th>{item?.status === "approved" || item?.status === "pending"? " " : item?.feedback}</th>
-                <th><button className="btn bg-cyan-200 hover:bg-cyan-300">Update</button></th>
+                <th><button className="btn bg-pink-300 hover:bg-pink-700 hover:text-white">Update</button></th>
               </tr>
             ))}
           </tbody>

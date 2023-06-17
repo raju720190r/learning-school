@@ -155,7 +155,7 @@ const AddAClass = () => {
             placeholder="Description"
           ></textarea>
         </div>
-        <input className="btn bg-cyan-300 hover:bg-cyan-400 mt-4" type="submit" value="Add Class" />
+        <input className="btn bg-pink-300 hover:bg-pink-700 hover:text-white mt-4" type="submit" value="Add Class" />
       </form>
     </div>
   );
