@@ -1,6 +1,6 @@
 import Lottie from "lottie-react";
 import { useContext, useEffect, useState } from "react";
-import logo from "../../assets/40594-young-woman-meditating-in-yoga-tree-pose.json";
+import logo from "../../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import useCart from "../../hooks/useCart";
@@ -81,7 +81,8 @@ const NavBar = () => {
             {navItem}
           </ul>
         </div>
-        <a className=" hover:bg-gray-200 px-3 rounded-xl text-lg   dark:hover:text-black">
+        <a className=" hover:bg-gray-200 px-3 rounded-xl text-lg flex items-center   dark:hover:text-black">
+          <img className="rounded-full sm:w-[50px] lg:w-28" src={logo} alt="" />
           <Link to={'/'} className="flex items-center">
             <p className="hidden md:block lg:text-3xl font-bold">Learning School</p>
           </Link>

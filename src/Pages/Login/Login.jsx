@@ -1,5 +1,4 @@
-import bannerImage from "../../assets/103084-new-yoga.json";
-import Lottie from "lottie-react";
+import bannerImage from "../../assets/login.gif";
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -46,7 +45,7 @@ const Login = () => {
     <div className="hero min-h-[80vh]  pt-20 md:pt-0 ">
       <div className="hero-content w-full flex flex-col md:flex-row">
         <div className="w-1/2">
-          <Lottie animationData={bannerImage} loop={true} />
+          <img src={bannerImage} alt="" />
         </div>
         <div className="card flex-shrink-0 md:w-1/3 shadow-2xl bg-base-100">
           <h1 className="text-xl font-semibold text-center mt-10">

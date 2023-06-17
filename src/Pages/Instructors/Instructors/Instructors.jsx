@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import useClasses from "../../../hooks/useClasses";
-import Lottie from "lottie-react";
-import loadingImage from "../../../assets/98432-loading";
+import loadingImage from "../../../assets/loading-waiting.gif";
 import useTitle from "../../../hooks/useTitle";
 
 const Instructors = () => {
@@ -13,9 +12,7 @@ const Instructors = () => {
   }, [classes]);
   if (instructors.length == 0) {
     return (
-      <div className="h-80vh">
-        <Lottie className="h-screen" animationData={loadingImage} loop={true} />
-      </div>
+      <div className="h-80vh w-96 mx-auto"><img src={loadingImage} alt="" /></div>
     );
   }
 

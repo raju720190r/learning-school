@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Lottie from "lottie-react";
-import bannerImage from "../../assets/103084-new-yoga";
+import bannerImage from "../../assets/logo.png";
 import logo from "../../assets/logo.png";
 
 import {
@@ -18,9 +18,7 @@ const Footer = () => {
     <footer className="footer p-10 bg-base-200 text-base-content mt-10">
       <div>
         <div className="avatar">
-          <div className="w-28 rounded-xl">
-          <Lottie  animationData={bannerImage} loop={true} />
-          </div>
+          <img className="rounded-full" style={{width:100,}} src={bannerImage} alt="" />
         </div>
         <h1 className="text-2xl font-bold text-[#727E9A]">Learning School</h1>
         <p className="md:w-96 text-[#727E9A]">

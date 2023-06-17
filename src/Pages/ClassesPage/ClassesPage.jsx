@@ -2,7 +2,7 @@ import Lottie from "lottie-react";
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import loadingImage from "../../assets/98432-loading";
+import loadingImage from "../../assets/loading-waiting.gif";
 import useAdmin from "../../hooks/useAdmin";
 import useCart from "../../hooks/useCart";
 import useClasses from "../../hooks/useClasses";
@@ -66,7 +66,7 @@ const ClassesPage = () => {
     setInstructors(classes);
   }, [classes]);
   if(classes.length == 0){
-    return <div className="h-80vh"><Lottie className="h-screen" animationData={loadingImage} loop={true} /></div>
+    return <div className="h-80vh w-96 mx-auto"><img src={loadingImage} alt="" /></div>
   }
   return (
     <div className="container mx-auto ">

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 import Lottie from "lottie-react";
-import loadingImage from "../../assets/98432-loading";
+import loadingImage from "../../assets/loading-waiting.gif";
 
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
@@ -10,9 +10,7 @@ const PrivateRoute = ({ children }) => {
   console.log("loading", loading);
   if (loading) {
     return (
-      <div className="h-80vh">
-        <Lottie className="h-screen" animationData={loadingImage} loop={true} />
-      </div>
+      <div className="h-80vh w-96 mx-auto"><img src={loadingImage} alt="" /></div>
     );
   }
 
