@@ -90,7 +90,7 @@ const ClassesPage = () => {
               <p>Price: {instructor?.price}</p>
             </div>
             <div className="card-actions px-7 pb-5">
-              <button  disabled={instructor?.availableSeats===0 || isAdmin || isInstructor} onClick={()=>handelAddToClass(instructor)} className="btn bg-cyan-400 hover:bg-cyan-500">Select Class</button>
+              <button  disabled={instructor?.availableSeats===0 || isAdmin || isInstructor} onClick={()=>handelAddToClass(instructor)} className="btn bg-pink-300 hover:bg-pink-700 hover:text-white">Select Class</button>
             </div>
           </div>
         ))}
